@@ -117,6 +117,7 @@ packages/ontology/tool-ontology/
 ## 六、后续计划（V2 / V3）
 
 - **V2**：工具箱「本体工作台」段——Onto-Model 前端托管 + 数据 API 切 `yamlStore`（去掉 Flask 依赖，原生融合）；模型树 + Canvas 图谱 + 编辑器联动。
+- **V2/V3 · UI 语义事件接口（已规划，暂不实现）**：把前端语义动作封装为事件，Agent 通过 `ui_event` 工具直接触发（详见 `docs/prd/ontology-workbench-ui-events.md`）。对应 v6 MU 模型「UI 事件驱动调用链」的运行时落地；V2 原生融合与 V3 生成表单均暴露事件注册表。
 - **V3**：补齐 M6 流程 / M7 报表 / MU / MM / MI 模型落盘与编辑；应用运行持久化（文件型 SQLite）。
 - 工作台自身 M1~M7 分层模型的完善（Dogfood 深化）。
 
