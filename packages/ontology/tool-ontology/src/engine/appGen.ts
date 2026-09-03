@@ -78,6 +78,7 @@ function json(res, code, obj) {
 }
 
 const server = http.createServer(async (req, res) => {
+  try {
   const u = new URL(req.url, 'http://x');
   const path = u.pathname;
 
@@ -135,6 +136,10 @@ const server = http.createServer(async (req, res) => {
   }
 
   json(res, 404, { error: 'not found: ' + req.method + ' ' + path });
+  } catch (err) {
+    // 结构化错误：约束/语法等失败返回 400 JSON，不重置连接
+    json(res, 400, { ok: false, error: String((err && err.message) || err) });
+  }
 });
 
 server.listen(port, () => {

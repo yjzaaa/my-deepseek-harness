@@ -114,6 +114,29 @@ packages/ontology/tool-ontology/
 
 ---
 
+### 正式测试套件（32 用例全绿）
+
+| 文件 | 覆盖 | 用例数 |
+|------|------|--------|
+| `tests/engine.spec.ts` | T1 引擎：M1 归一化三种结构、目录读写、校验正反向、图谱节点/边全类型、建表约束 | 13 |
+| `tests/tools.spec.ts` | T2 工具：explore/model/validate/app_generate/app_run 各分支 + 参数校验错误路径 | 11 |
+| `tests/e2e.spec.ts` | T3.1 工具在真实 Agent Loop 中被调用（mock LLM）、结果进会话、产物落盘 | 1 |
+| `tests/e2e-real.spec.ts` | **T3.2 真实 LLM**（火山方舟 deepseek-v4-flash）AI 自主建模→校验→图谱数据（无 key 自动跳过） | 1 |
+| `tests/app.spec.ts` | T5.2 应用运行时：CRUD、NOT NULL/UNIQUE 约束、404、CORS | 5 |
+| `tests/app-browser.spec.ts` | T5.1 表单页 Puppeteer 浏览器交互：打开→填表→提交→数据出现（无 Chrome 跳过） | 1 |
+
+**T3.2 真实 LLM 端到端要点**：会话中 AI 自主调用 `ontology_model`/`ontology_validate`，落盘至少 M1 + 图谱数据；实测 AI 能自主发现并修复建模错误（如 rootEntity 结构）。
+
+**测试暴露并修复的 bug**：生成的 `app.cjs` 在 SQL 约束错误（NOT NULL/UNIQUE）时抛异常导致连接重置——已修复为返回结构化 400 JSON（`appGen.ts` 增加 try/catch）。
+
+运行：`pnpm --filter @deepseek-ai/dsh-tool-ontology test`（真实 LLM 需 `ARK_API_KEY`；浏览器需系统 Chrome）。
+
+### 冒烟脚本（快速人工验证）
+
+`tests/smoke.mjs` / `tests/smoke2.mjs`：mock ctx 直接调工具，跑通建模/校验/应用全链路。
+
+---
+
 ## 六、后续计划（V2 / V3）
 
 - **V2**：工具箱「本体工作台」段——Onto-Model 前端托管 + 数据 API 切 `yamlStore`（去掉 Flask 依赖，原生融合）；模型树 + Canvas 图谱 + 编辑器联动。

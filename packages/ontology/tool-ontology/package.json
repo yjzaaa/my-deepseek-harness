@@ -13,7 +13,9 @@
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:^",
@@ -26,12 +28,17 @@
     "js-yaml": "^4.1.0"
   },
   "devDependencies": {
+    "@deepseek-ai/cordis": "workspace:^",
     "@deepseek-ai/dsh-agent": "workspace:^",
     "@deepseek-ai/dsh-agent-loop-testkit": "workspace:^",
     "@deepseek-ai/dsh-tools": "workspace:^",
-    "@deepseek-ai/cordis": "workspace:^",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.0.0",
+    "puppeteer-core": "^25.9.0",
     "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "test": "vitest run tests/",
+    "build": "tsc -b"
   }
 }
