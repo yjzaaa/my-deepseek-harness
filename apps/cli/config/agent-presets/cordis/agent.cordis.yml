@@ -241,6 +241,9 @@
 - id: tool-browser
   name: '@deepseek-ai/dsh-tool-browser'
 
+- id: tool-ontology
+  name: '@deepseek-ai/dsh-tool-ontology'
+
 # ── self-modification ───────────────────────────────────────────────────────
 
 # Read the live runtime, mount a temporary plugin, unmount it. The toolset is a

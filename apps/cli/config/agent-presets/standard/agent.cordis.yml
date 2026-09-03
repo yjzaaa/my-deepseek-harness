@@ -252,3 +252,6 @@
 
 - id: tool-browser
   name: '@deepseek-ai/dsh-tool-browser'
+
+- id: tool-ontology
+  name: '@deepseek-ai/dsh-tool-ontology'
